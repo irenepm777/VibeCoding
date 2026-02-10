@@ -1,45 +1,29 @@
-// script.js
-// Versión base (Prompt 1): navegación responsiva + utilidades pequeñas.
-// En próximos prompts se añadirá calculadora, temas por era y parallax.
+const form = document.getElementById("calcForm");
 
-(function () {
-  "use strict";
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-  const $ = (sel, root = document) => root.querySelector(sel);
+  const age = Number(document.getElementById("age").value);
+  const height = Number(document.getElementById("height").value);
+  const weight = Number(document.getElementById("weight").value);
 
-  // ----------------------------
-  // Mobile nav
-  // ----------------------------
-  function initMobileNav() {
-    const toggle = $(".nav__toggle");
-    const menu = $("#navMenu");
-    if (!toggle || !menu) return;
-
-    toggle.addEventListener("click", () => {
-      const open = menu.classList.toggle("is-open");
-      toggle.setAttribute("aria-expanded", String(open));
-    });
-
-    // Cerrar al clicar un enlace
-    menu.addEventListener("click", (e) => {
-      const a = e.target.closest("a");
-      if (!a) return;
-      menu.classList.remove("is-open");
-      toggle.setAttribute("aria-expanded", "false");
-    });
-
-    // Cerrar al clicar fuera
-    document.addEventListener("click", (e) => {
-      const isInside = e.target.closest(".nav");
-      if (!isInside) {
-        menu.classList.remove("is-open");
-        toggle.setAttribute("aria-expanded", "false");
-      }
-    });
+  if (
+    age < 5 || age > 120 ||
+    height < 80 || height > 230 ||
+    weight < 20 || weight > 250
+  ) {
+    alert("Por favor, introduce valores realistas.");
+    return;
   }
 
-  // Init
-  document.addEventListener("DOMContentLoaded", () => {
-    initMobileNav();
-  });
-})();
+  const base = Math.max(1, 100 - age);
+  const sizeFactor = (height + weight) / 200;
+
+  const tri = Math.max(0.5, base / sizeFactor);
+  const jur = Math.max(0.3, base / (sizeFactor * 1.3));
+  const cre = Math.max(0.2, base / (sizeFactor * 1.6));
+
+  document.getElementById("resTri").textContent = tri.toFixed(1) + " días";
+  document.getElementById("resJur").textContent = jur.toFixed(1) + " días";
+  document.getElementById("resCre").textContent = cre.toFixed(1) + " días";
+});

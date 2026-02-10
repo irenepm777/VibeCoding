@@ -1,239 +1,91 @@
-<!-- index.html -->
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Mesozoico — Landing divulgativa</title>
-  <meta name="description" content="Landing divulgativa sobre el Mesozoico: Triásico, Jurásico y Cretácico. Versión base para ampliar con interactividad." />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mesozoico interactivo</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
-
 <body>
-  <a class="skip-link" href="#contenido">Saltar al contenido</a>
 
-  <header class="site-header">
-    <div class="container header__inner">
-      <div class="brand" aria-label="Marca">
-        <span class="brand__dot" aria-hidden="true"></span>
-        <span class="brand__name">Mesozoico</span>
-        <span class="brand__tag">— guía base</span>
+<header class="hero">
+  <h1>El Mesozoico</h1>
+  <p>Explora las eras de los dinosaurios y descubre cuánto tiempo sobrevivirías en cada una.</p>
+</header>
+
+<main class="container">
+
+  <section class="intro">
+    <h2>¿Qué fue el Mesozoico?</h2>
+    <p>
+      El Mesozoico es una era geológica que se extiende desde hace unos 252 hasta hace 66 millones de años.
+      Se divide en tres grandes etapas: Triásico, Jurásico y Cretácico, y es conocida por el dominio de los dinosaurios.
+    </p>
+  </section>
+
+  <section class="era">
+    <h2>Triásico</h2>
+    <p>
+      Periodo de transición tras una gran extinción. El clima era árido y aparecieron los primeros dinosaurios,
+      pequeños y ágiles.
+    </p>
+  </section>
+
+  <section class="era">
+    <h2>Jurásico</h2>
+    <p>
+      Etapa de gran diversidad biológica, con climas más húmedos y dinosaurios de gran tamaño dominando los ecosistemas.
+    </p>
+  </section>
+
+  <section class="era">
+    <h2>Cretácico</h2>
+    <p>
+      Última etapa del Mesozoico, con ecosistemas complejos y grandes depredadores.
+      Finalizó con una extinción masiva.
+    </p>
+  </section>
+
+  <section class="calculator">
+    <h2>Calculadora de supervivencia</h2>
+
+    <form id="calcForm" class="calc-form">
+      <label>
+        Edad (años)
+        <input type="number" id="age" min="5" max="120" required />
+      </label>
+
+      <label>
+        Altura (cm)
+        <input type="number" id="height" min="80" max="230" required />
+      </label>
+
+      <label>
+        Peso (kg)
+        <input type="number" id="weight" min="20" max="250" required />
+      </label>
+
+      <button type="submit">Calcular</button>
+    </form>
+
+    <div class="results">
+      <div class="result-card">
+        <h3>Triásico</h3>
+        <p id="resTri">—</p>
       </div>
-
-      <nav class="nav" aria-label="Navegación principal">
-        <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="navMenu">
-          Menú
-        </button>
-        <div class="nav__menu" id="navMenu">
-          <a class="nav__link" href="#intro">Inicio</a>
-          <a class="nav__link" href="#triasico">Triásico</a>
-          <a class="nav__link" href="#jurasico">Jurásico</a>
-          <a class="nav__link" href="#cretacico">Cretácico</a>
-        </div>
-      </nav>
+      <div class="result-card">
+        <h3>Jurásico</h3>
+        <p id="resJur">—</p>
+      </div>
+      <div class="result-card">
+        <h3>Cretácico</h3>
+        <p id="resCre">—</p>
+      </div>
     </div>
-  </header>
+  </section>
 
-  <main id="contenido">
-    <!-- HERO / INTRO -->
-    <section id="intro" class="hero section">
-      <div class="container hero__grid">
-        <div class="hero__text">
-          <p class="eyebrow">Divulgación · Geología · Paleontología</p>
-          <h1>El Mesozoico, la Era de los Dinosaurios</h1>
-          <p class="lead">
-            Entre ~252 y ~66 millones de años atrás, la Tierra vivió transformaciones climáticas,
-            tectónicas y biológicas que culminaron en algunos de los ecosistemas más emblemáticos
-            de la historia. Esta es una versión base de una landing informativa, diseñada para
-            ampliarse en futuras iteraciones.
-          </p>
+</main>
 
-          <div class="hero__facts" role="list" aria-label="Datos clave">
-            <div class="fact" role="listitem">
-              <span class="fact__k">Duración</span>
-              <span class="fact__v">≈ 186 millones de años</span>
-            </div>
-            <div class="fact" role="listitem">
-              <span class="fact__k">Etapas</span>
-              <span class="fact__v">Triásico · Jurásico · Cretácico</span>
-            </div>
-            <div class="fact" role="listitem">
-              <span class="fact__k">Cierre</span>
-              <span class="fact__v">Extinción masiva (K–Pg)</span>
-            </div>
-          </div>
-
-          <div class="hero__cta">
-            <a class="btn" href="#triasico">Empezar por el Triásico</a>
-            <a class="btn btn--ghost" href="#cretacico">Ir al Cretácico</a>
-          </div>
-        </div>
-
-        <div class="hero__media" aria-label="Imagen destacada (placeholder)">
-          <!-- Placeholder para imagen externa -->
-          <div class="media-card">
-            <div class="media-card__img" aria-hidden="true"></div>
-            <p class="media-card__caption">
-              Placeholder de imagen. En próximas versiones puedes añadir ilustraciones o fotos (con créditos).
-            </p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ERAS -->
-    <section class="section">
-      <div class="container">
-        <h2 class="section__title">Las tres etapas del Mesozoico</h2>
-        <p class="section__subtitle">
-          Cada etapa tiene una personalidad propia: cambios climáticos, evolución de grupos clave y reconfiguración de continentes.
-        </p>
-
-        <div class="era-grid" role="list">
-          <article class="era-card" role="listitem">
-            <h3>Triásico</h3>
-            <p>Recuperación tras una gran extinción. Surgen los primeros dinosaurios y mamíferos.</p>
-            <a class="era-card__link" href="#triasico">Ver Triásico →</a>
-          </article>
-
-          <article class="era-card" role="listitem">
-            <h3>Jurásico</h3>
-            <p>Climas cálidos y grandes herbívoros. Auge de saurópodos y depredadores icónicos.</p>
-            <a class="era-card__link" href="#jurasico">Ver Jurásico →</a>
-          </article>
-
-          <article class="era-card" role="listitem">
-            <h3>Cretácico</h3>
-            <p>Expansión de plantas con flores y diversidad máxima antes del evento K–Pg.</p>
-            <a class="era-card__link" href="#cretacico">Ver Cretácico →</a>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- TRIASSIC -->
-    <section id="triasico" class="section era era--triasico" aria-labelledby="triTitle">
-      <div class="container era__layout">
-        <div class="era__text">
-          <h2 id="triTitle">Triásico</h2>
-          <p class="era__meta"><strong>≈ 252–201 Ma</strong> · Recuperación ecológica y “primeros pasos” de linajes clave.</p>
-
-          <p>
-            El Triásico marca el inicio del Mesozoico y se caracteriza por la recuperación de los ecosistemas tras una
-            gran crisis biológica previa. En un mundo donde los continentes estaban más unidos, los ambientes interiores
-            podían ser áridos y extremos, favoreciendo adaptaciones resistentes.
-          </p>
-
-          <div class="era__bullets">
-            <div class="bullet">
-              <h3>Clima</h3>
-              <p>Generalmente cálido; contrastes fuertes en zonas interiores. Variabilidad regional.</p>
-            </div>
-            <div class="bullet">
-              <h3>Fauna</h3>
-              <p>Primeros dinosaurios, reptiles marinos tempranos, y linajes que darían lugar a mamíferos.</p>
-            </div>
-            <div class="bullet">
-              <h3>Flora</h3>
-              <p>Coníferas y otras gimnospermas dominan; paisajes con bosques y regiones más secas.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="era__media" aria-label="Imagen Triásico (placeholder)">
-          <div class="media-card">
-            <div class="media-card__img media-card__img--triasico" aria-hidden="true"></div>
-            <p class="media-card__caption">Placeholder de imagen del Triásico.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- JURASSIC -->
-    <section id="jurasico" class="section era era--jurasico" aria-labelledby="jurTitle">
-      <div class="container era__layout">
-        <div class="era__text">
-          <h2 id="jurTitle">Jurásico</h2>
-          <p class="era__meta"><strong>≈ 201–145 Ma</strong> · Grandes herbívoros, ecosistemas exuberantes, mares ricos.</p>
-
-          <p>
-            Durante el Jurásico, los ecosistemas se diversifican y los dinosaurios alcanzan un dominio espectacular.
-            Muchos ambientes fueron cálidos y relativamente húmedos, con bosques extensos en diversas latitudes.
-          </p>
-
-          <div class="era__bullets">
-            <div class="bullet">
-              <h3>Clima</h3>
-              <p>Cálido en muchas regiones, con humedad notable en áreas boscosas.</p>
-            </div>
-            <div class="bullet">
-              <h3>Fauna</h3>
-              <p>Saurópodos gigantes, terópodos depredadores, y diversidad marina en expansión.</p>
-            </div>
-            <div class="bullet">
-              <h3>Flora</h3>
-              <p>Coníferas dominantes, helechos y otras plantas adaptadas a bosques extensos.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="era__media" aria-label="Imagen Jurásico (placeholder)">
-          <div class="media-card">
-            <div class="media-card__img media-card__img--jurasico" aria-hidden="true"></div>
-            <p class="media-card__caption">Placeholder de imagen del Jurásico.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CRETACEOUS -->
-    <section id="cretacico" class="section era era--cretacico" aria-labelledby="creTitle">
-      <div class="container era__layout">
-        <div class="era__text">
-          <h2 id="creTitle">Cretácico</h2>
-          <p class="era__meta"><strong>≈ 145–66 Ma</strong> · Máxima diversidad y cierre abrupto con el evento K–Pg.</p>
-
-          <p>
-            El Cretácico ve la expansión de las plantas con flores (angiospermas) y una gran diversificación de
-            nichos ecológicos. A medida que los continentes se separan más, aparecen faunas regionales con identidad
-            propia. El final está marcado por una extinción masiva que redefine la vida en la Tierra.
-          </p>
-
-          <div class="era__bullets">
-            <div class="bullet">
-              <h3>Clima</h3>
-              <p>Generalmente cálido, con variaciones regionales; mares interiores en algunas zonas.</p>
-            </div>
-            <div class="bullet">
-              <h3>Fauna</h3>
-              <p>Gran diversidad de dinosaurios, aves tempranas, reptiles marinos y polinizadores emergentes.</p>
-            </div>
-            <div class="bullet">
-              <h3>Flora</h3>
-              <p>Expansión de angiospermas; cambios en ecosistemas terrestres y cadenas tróficas.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="era__media" aria-label="Imagen Cretácico (placeholder)">
-          <div class="media-card">
-            <div class="media-card__img media-card__img--cretacico" aria-hidden="true"></div>
-            <p class="media-card__caption">Placeholder de imagen del Cretácico.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <footer class="site-footer">
-      <div class="container footer__inner">
-        <p class="footer__p">
-          Versión base (Prompt 1). Próximas iteraciones: calculadora, cambio de tema por era, parallax e imágenes reales con créditos.
-        </p>
-        <a class="footer__top" href="#intro">Volver arriba ↑</a>
-      </div>
-    </footer>
-  </main>
-
-  <script src="script.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
