@@ -1,91 +1,450 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mesozoico interactivo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="¿Cuánto durarías en el Mesozoico? Una landing divulgativa e inmersiva con calculadora de supervivencia (Triásico, Jurásico y Cretácico)." />
+  <title>¿Cuánto durarías en el Mesozoico?</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body>
 
-<header class="hero">
-  <h1>El Mesozoico</h1>
-  <p>Explora las eras de los dinosaurios y descubre cuánto tiempo sobrevivirías en cada una.</p>
-</header>
+<body data-era="default">
+  <div class="parallax-layer" aria-hidden="true">
+    <img src="assets/coelophysis.png" id="dinoParallax" alt="" />
+  </div>
+  <a class="skip-link" href="#main">Saltar al contenido principal</a>
 
-<main class="container">
+  <header class="topbar" role="banner">
+    <nav class="nav" aria-label="Navegación principal">
+      <a class="brand" href="#inicio" aria-label="Inicio — Mesozoico">
+        <span class="brand__mark" aria-hidden="true">🦴</span>
+        <span class="brand__text">Mesozoico</span>
+      </a>
 
-  <section class="intro">
-    <h2>¿Qué fue el Mesozoico?</h2>
-    <p>
-      El Mesozoico es una era geológica que se extiende desde hace unos 252 hasta hace 66 millones de años.
-      Se divide en tres grandes etapas: Triásico, Jurásico y Cretácico, y es conocida por el dominio de los dinosaurios.
-    </p>
-  </section>
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="navMenu">
+        <span class="sr-only">Abrir menú</span>
+        <span class="burger" aria-hidden="true"></span>
+      </button>
 
-  <section class="era">
-    <h2>Triásico</h2>
-    <p>
-      Periodo de transición tras una gran extinción. El clima era árido y aparecieron los primeros dinosaurios,
-      pequeños y ágiles.
-    </p>
-  </section>
+      <ul id="navMenu" class="nav__menu">
+        <li><a class="nav__link" href="#triasico" data-era-link="triasico">Triásico</a></li>
+        <li><a class="nav__link" href="#jurasico" data-era-link="jurasico">Jurásico</a></li>
+        <li><a class="nav__link" href="#cretacico" data-era-link="cretacico">Cretácico</a></li>
+        <li><a class="nav__link nav__link--cta" href="#calculadora">Calculadora</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <section class="era">
-    <h2>Jurásico</h2>
-    <p>
-      Etapa de gran diversidad biológica, con climas más húmedos y dinosaurios de gran tamaño dominando los ecosistemas.
-    </p>
-  </section>
+  <main id="main">
+    <!-- HERO -->
+    <section id="inicio" class="hero" aria-labelledby="heroTitle">
+      <div class="hero__bg" aria-hidden="true"></div>
+      <div class="container hero__inner">
+        <p class="kicker">Divulgación científica • Experiencia inmersiva • Vanilla JS</p>
+        <h1 id="heroTitle" class="hero__title">¿Cuánto durarías en el <span class="accent">Mesozoico</span>?</h1>
+        <p class="hero__lead">
+          Un viaje por el <strong>Triásico</strong>, el <strong>Jurásico</strong> y el <strong>Cretácico</strong> con contexto real:
+          clima, flora, fauna y riesgos para un humano moderno. Y sí: una calculadora (educativa) de supervivencia.
+        </p>
 
-  <section class="era">
-    <h2>Cretácico</h2>
-    <p>
-      Última etapa del Mesozoico, con ecosistemas complejos y grandes depredadores.
-      Finalizó con una extinción masiva.
-    </p>
-  </section>
+        <div class="hero__actions">
+          <a class="btn" href="#periodos">Explorar épocas</a>
+          <a class="btn btn--ghost" href="#calculadora">Ir a la calculadora</a>
+        </div>
 
-  <section class="calculator">
-    <h2>Calculadora de supervivencia</h2>
-
-    <form id="calcForm" class="calc-form">
-      <label>
-        Edad (años)
-        <input type="number" id="age" min="5" max="120" required />
-      </label>
-
-      <label>
-        Altura (cm)
-        <input type="number" id="height" min="80" max="230" required />
-      </label>
-
-      <label>
-        Peso (kg)
-        <input type="number" id="weight" min="20" max="250" required />
-      </label>
-
-      <button type="submit">Calcular</button>
-    </form>
-
-    <div class="results">
-      <div class="result-card">
-        <h3>Triásico</h3>
-        <p id="resTri">—</p>
+        <div class="hero__note" role="note">
+          <strong>Nota:</strong> la calculadora es una simulación divulgativa. No es un modelo médico ni un consejo de salud.
+        </div>
       </div>
-      <div class="result-card">
-        <h3>Jurásico</h3>
-        <p id="resJur">—</p>
-      </div>
-      <div class="result-card">
-        <h3>Cretácico</h3>
-        <p id="resCre">—</p>
-      </div>
-    </div>
-  </section>
+    </section>
 
-</main>
+    <!-- SELECTOR / OVERVIEW -->
+    <section id="periodos" class="section">
+      <div class="container">
+        <header class="section__header">
+          <h2 class="section__title">Tres mundos, tres reglas</h2>
+          <p class="section__subtitle">
+            Cambia de época para transformar la atmósfera. Cada periodo ajusta colores, texturas y el enfoque de la narrativa.
+          </p>
+        </header>
 
-<script src="script.js"></script>
+        <div class="era-grid" role="tablist" aria-label="Selector de época">
+          <button class="era-card" type="button" role="tab" aria-selected="true" data-era="triasico" data-era-hook>
+            <span class="era-card__tag">Triásico</span>
+            <span class="era-card__title">Después del gran vacío</span>
+            <span class="era-card__meta">≈ 252–201 Ma • mundo árido • ecosistemas en reconstrucción</span>
+          </button>
+          <button class="era-card" type="button" role="tab" aria-selected="false" data-era="jurasico" data-era-hook>
+            <span class="era-card__tag">Jurásico</span>
+            <span class="era-card__title">Bosques, gigantes y depredadores</span>
+            <span class="era-card__meta">≈ 201–145 Ma • climas templados • explosión de biodiversidad</span>
+          </button>
+          <button class="era-card" type="button" role="tab" aria-selected="false" data-era="cretacico" data-era-hook>
+            <span class="era-card__tag">Cretácico</span>
+            <span class="era-card__title">Flores, plumas y tensión</span>
+            <span class="era-card__meta">≈ 145–66 Ma • angiospermas • ecosistemas complejos</span>
+          </button>
+        </div>
+
+        <div class="callout" role="status" aria-live="polite">
+          Estás explorando: <strong id="activeEraLabel">Triásico</strong>.
+          <span class="muted">La temática cambia al seleccionar otra época.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRIASSIC -->
+    <section id="triasico" class="section era era--triasico" data-era-section="triasico" aria-labelledby="triTitle">
+      <div class="container">
+        <header class="era__header">
+          <h2 id="triTitle" class="era__title">Triásico</h2>
+          <p class="era__subtitle">Un planeta que se recompone: calor, sequedad y linajes que prueban suerte.</p>
+        </header>
+
+        <div class="era__layout">
+          <div class="era__text">
+            <p>
+              El Triásico abre el Mesozoico tras la mayor extinción masiva conocida. Los ecosistemas están “reiniciándose”:
+              continentes unidos en <em>Pangea</em>, interiores continentales secos, grandes oscilaciones climáticas y una biosfera
+              que vuelve a llenar nichos. Aquí aparecen y se diversifican los primeros dinosaurios verdaderos, aunque durante buena
+              parte del periodo no dominan todavía todos los paisajes.
+            </p>
+            <p>
+              Para un humano moderno, el riesgo no es solo “un depredador”: es el <strong>estrés ambiental</strong>.
+              En un mundo cálido y frecuentemente árido, la hidratación, la exposición y la ausencia de medicina moderna serían
+              limitantes antes incluso de cruzarte con fauna peligrosa.
+            </p>
+
+            <div class="fact-grid">
+              <div class="fact">
+                <h3>Clima</h3>
+                <p>En general cálido; interiores continentales secos, con monzones estacionales en algunas regiones.</p>
+              </div>
+              <div class="fact">
+                <h3>Flora</h3>
+                <p>Coníferas, cicadófitas y helechos. Bosques abiertos y matorral en zonas menos áridas.</p>
+              </div>
+              <div class="fact">
+                <h3>Fauna</h3>
+                <p>Arcosaurios, grandes anfibios tempranos, primeros dinosaurios y reptiles marinos en expansión.</p>
+              </div>
+            </div>
+
+            <details class="accordion" open>
+              <summary>Subetapas del Triásico (temprano, medio, tardío)</summary>
+              <div class="accordion__content">
+                <h4>Triásico Temprano</h4>
+                <p>
+                  Recuperación ecológica tras la extinción Pérmico–Triásico. Faunas simplificadas, con nichos abiertos y
+                  condiciones ambientales duras en muchas regiones.
+                </p>
+                <h4>Triásico Medio</h4>
+                <p>
+                  Aumenta la diversidad. Se consolidan linajes de arcosaurios; proliferan reptiles marinos (como ictiosaurios).
+                  Los ecosistemas se vuelven más estructurados.
+                </p>
+                <h4>Triásico Tardío</h4>
+                <p>
+                  Aparecen dinosaurios más diversos y algunos se vuelven comunes. También crecen los grandes depredadores
+                  arcosaurios no dinosaurianos. El periodo culmina con otra crisis y extinciones hacia el límite con el Jurásico.
+                </p>
+              </div>
+            </details>
+          </div>
+
+          <aside class="era__media" aria-label="Galería Triásico">
+            <div class="media-grid">
+              <figure class="media">
+                <img src="assets/triasico_1.jpg" data-placeholder="true" alt="Paisaje árido del Triásico" />
+                <figcaption>Paisaje • Pangea interior</figcaption>
+              </figure>
+              <figure class="media">
+                <img src="assets/triasico_2.jpg" data-placeholder="true" alt="Fauna del Triásico: arcosaurios y primeros dinosaurios" />
+                <figcaption>Fauna • arcosaurios tempranos</figcaption>
+              </figure>
+              <figure class="media">
+                <img src="assets/triasico_3.jpg" data-placeholder="true" alt="Flora del Triásico: coníferas y cicadófitas" />
+                <figcaption>Flora • coníferas/cícadas</figcaption>
+              </figure>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- JURASSIC -->
+    <section id="jurasico" class="section era era--jurasico" data-era-section="jurasico" aria-labelledby="jurTitle">
+      <div class="container">
+        <header class="era__header">
+          <h2 id="jurTitle" class="era__title">Jurásico</h2>
+          <p class="era__subtitle">Ecosistemas exuberantes: más recursos… y depredadores que no negocian.</p>
+        </header>
+
+        <div class="era__layout">
+          <div class="era__text">
+            <p>
+              El Jurásico es el “gran despliegue” de muchos grupos clásicos: dinosaurios gigantes herbívoros, terópodos
+              depredadores de gran tamaño y cielos con pterosaurios. Pangea comienza a fragmentarse, lo que altera corrientes
+              oceánicas y climas regionales, y favorece ecosistemas más variados.
+            </p>
+            <p>
+              Para un humano moderno, la abundancia de vegetación no es sinónimo de seguridad: la <strong>cadena trófica</strong>
+              es intensa. Además, la exposición a patógenos desconocidos y la ausencia de antibióticos convertirían heridas
+              pequeñas en problemas enormes.
+            </p>
+
+            <div class="fact-grid">
+              <div class="fact">
+                <h3>Clima</h3>
+                <p>En general más húmedo y templado que el Triásico, con fuertes gradientes regionales.</p>
+              </div>
+              <div class="fact">
+                <h3>Flora</h3>
+                <p>Coníferas dominantes, ginkgos, helechos y grandes bosques; paisajes “verdes” extensos.</p>
+              </div>
+              <div class="fact">
+                <h3>Fauna</h3>
+                <p>Saurópodos gigantes, estegosaurios, terópodos grandes; mares con reptiles y cefalópodos abundantes.</p>
+              </div>
+            </div>
+
+            <details class="accordion">
+              <summary>Subetapas del Jurásico (temprano, medio, tardío)</summary>
+              <div class="accordion__content">
+                <h4>Jurásico Temprano</h4>
+                <p>
+                  Tras la crisis del final del Triásico, algunos linajes se expanden rápidamente. Aumenta la diversidad de
+                  dinosaurios y se estabilizan ecosistemas.
+                </p>
+                <h4>Jurásico Medio</h4>
+                <p>
+                  Consolidación de comunidades complejas: herbívoros grandes que modelan paisajes y depredadores especializados.
+                  Los océanos son altamente productivos.
+                </p>
+                <h4>Jurásico Tardío</h4>
+                <p>
+                  Muchos de los “iconos” aparecen o se hacen comunes. Los ecosistemas muestran un equilibrio dinámico con
+                  abundancia de grandes animales, lo que incrementa riesgos para especies pequeñas y vulnerables.
+                </p>
+              </div>
+            </details>
+          </div>
+
+          <aside class="era__media" aria-label="Galería Jurásico">
+            <div class="media-grid">
+              <figure class="media">
+                <img src="assets/jurasico_1.avif" data-placeholder="true" alt="Bosques del Jurásico" />
+                <figcaption>Paisaje • bosque jurásico</figcaption>
+              </figure>
+              <figure class="media">
+                <img src="assets/jurasico_2.jpg" data-placeholder="true" alt="Saurópodos y terópodos del Jurásico" />
+                <figcaption>Fauna • gigantismo</figcaption>
+              </figure>
+              <figure class="media">
+                <img src="assets/jurasico_3.jpg" data-placeholder="true" alt="Reptiles marinos del Jurásico" />
+                <figcaption>Océanos • alta productividad</figcaption>
+              </figure>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- CRETACEOUS -->
+    <section id="cretacico" class="section era era--cretacico" data-era-section="cretacico" aria-labelledby="creTitle">
+      <div class="container">
+        <header class="era__header">
+          <h2 id="creTitle" class="era__title">Cretácico</h2>
+          <p class="era__subtitle">El mundo florece: angiospermas, aves, plumas… y ecosistemas al límite.</p>
+        </header>
+
+        <div class="era__layout">
+          <div class="era__text">
+            <p>
+              El Cretácico transforma la apariencia del planeta. Las <strong>angiospermas</strong> (plantas con flor) se expanden
+              y reconfiguran redes ecológicas; aves modernas y dinosaurios con plumas diversifican estrategias; los continentes
+              se separan más y los mares interiores crean hábitats ricos y cambiantes.
+            </p>
+            <p>
+              Para un humano moderno, el reto aquí es la <strong>complejidad</strong>: ecosistemas densos con más vectores
+              biológicos, mayor presión de depredación en muchos ambientes y climas que pueden variar regionalmente.
+              La supervivencia es una carrera entre energía, refugio y azar.
+            </p>
+
+            <div class="fact-grid">
+              <div class="fact">
+                <h3>Clima</h3>
+                <p>Frecuentemente cálido, con niveles del mar altos y ambientes costeros extensos.</p>
+              </div>
+              <div class="fact">
+                <h3>Flora</h3>
+                <p>Expansión de angiospermas, junto a coníferas; paisajes más parecidos (en parte) a los actuales.</p>
+              </div>
+              <div class="fact">
+                <h3>Fauna</h3>
+                <p>Dinosaurios muy diversos, aves, insectos polinizadores; depredadores especializados y grandes herbívoros.</p>
+              </div>
+            </div>
+
+            <details class="accordion">
+              <summary>Subetapas del Cretácico (temprano y tardío)</summary>
+              <div class="accordion__content">
+                <h4>Cretácico Temprano</h4>
+                <p>
+                  Expansión gradual de angiospermas y cambios en comunidades. Diversificación de grupos con plumas y
+                  estrategias de vuelo; ecosistemas regionales muy variados.
+                </p>
+                <h4>Cretácico Tardío</h4>
+                <p>
+                  Ecosistemas complejos y altamente competitivos. Grandes depredadores y herbívoros dominan múltiples regiones.
+                  El periodo termina con la extinción masiva del límite K–Pg.
+                </p>
+              </div>
+            </details>
+          </div>
+
+          <aside class="era__media" aria-label="Galería Cretácico">
+            <div class="media-grid">
+              <figure class="media">
+                <img src="assets/cretacico_1.webp" data-placeholder="true" alt="Plantas con flor del Cretácico" />
+                <figcaption>Flora • angiospermas</figcaption>
+              </figure>
+              <figure class="media">
+                <img src="assets/cretacico_2.webp" data-placeholder="true" alt="Dinosaurios con plumas y aves tempranas" />
+                <figcaption>Fauna • plumas y vuelo</figcaption>
+              </figure>
+              <figure class="media">
+                <img src="assets/cretacico_3.jpg" data-placeholder="true" alt="Mares interiores del Cretácico" />
+                <figcaption>Ambientes • mares interiores</figcaption>
+              </figure>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- CALCULATOR -->
+    <section id="calculadora" class="section calculator" aria-labelledby="calcTitle">
+      <div class="container">
+        <header class="section__header">
+          <h2 id="calcTitle" class="section__title">Calculadora de supervivencia</h2>
+          <p class="section__subtitle">
+            Introduce valores realistas. La web rechaza rangos imposibles y explica <em>por qué</em> cambia la supervivencia entre épocas.
+          </p>
+        </header>
+
+        <div class="calc-layout">
+          <form class="calc" id="calcForm" novalidate>
+            <div class="field">
+              <label for="age">Edad <span class="muted">(años)</span></label>
+              <input id="age" name="age" type="number" inputmode="numeric" min="5" max="110" placeholder="Ej: 18" required />
+              <p class="field__hint">Rango permitido: 5–110</p>
+              <p class="field__error" id="ageError" aria-live="polite"></p>
+            </div>
+
+            <div class="field">
+              <label for="height">Altura <span class="muted">(cm)</span></label>
+              <input id="height" name="height" type="number" inputmode="numeric" min="80" max="230" placeholder="Ej: 180" required />
+              <p class="field__hint">Rango permitido: 80–230</p>
+              <p class="field__error" id="heightError" aria-live="polite"></p>
+            </div>
+
+            <div class="field">
+              <label for="weight">Peso <span class="muted">(kg)</span></label>
+              <input id="weight" name="weight" type="number" inputmode="numeric" min="20" max="250" placeholder="Ej: 60" required />
+              <p class="field__hint">Rango permitido: 20–250</p>
+              <p class="field__error" id="weightError" aria-live="polite"></p>
+            </div>
+
+            <div class="calc__actions">
+              <button class="btn" type="submit">Calcular supervivencia</button>
+              <button class="btn btn--ghost" type="button" id="resetBtn">Restablecer</button>
+            </div>
+
+            <p class="muted small">
+              *La simulación es lúdica y divulgativa: modela riesgos ambientales y biológicos de forma simplificada.
+            </p>
+          </form>
+
+          <div class="results" aria-label="Resultados">
+            <div class="results__head">
+              <h3 class="results__title">Resultados</h3>
+              <p class="muted">Tu supervivencia estimada en cada periodo, con explicación científica.</p>
+            </div>
+
+            <div id="resultsLive" class="sr-only" aria-live="polite"></div>
+
+            <div class="result-grid">
+              <article class="result-card" data-result="triasico">
+                <header class="result-card__head">
+                  <h4>Triásico</h4>
+                  <p class="result-card__time" id="resTriTime">—</p>
+                </header>
+              </article>
+
+              <article class="result-card" data-result="jurasico">
+                <header class="result-card__head">
+                  <h4>Jurásico</h4>
+                  <p class="result-card__time" id="resJurTime">—</p>
+                </header>
+              </article>
+
+              <article class="result-card" data-result="cretacico">
+                <header class="result-card__head">
+                  <h4>Cretácico</h4>
+                  <p class="result-card__time" id="resCreTime">—</p>
+                </header>
+              </article>
+            </div>
+
+            <div class="chart-card">
+              <div class="chart-card__head">
+                <h4>Comparativa visual</h4>
+                <p class="muted small">Barras: más alto = más supervivencia estimada</p>
+              </div>
+              <canvas id="chart" width="640" height="240" aria-label="Gráfico de supervivencia por periodo" role="img"></canvas>
+            </div>
+
+            <section class="calc-explanation" aria-labelledby="expTitle">
+              <h3 id="expTitle">¿Por qué dura eso?</h3>
+
+              <article class="exp-era">
+                <h4>Triásico</h4>
+                <p id="expTriWhy"></p>
+                <ul id="expTriBullets"></ul>
+              </article>
+
+              <article class="exp-era">
+                <h4>Jurásico</h4>
+                <p id="expJurWhy"></p>
+                <ul id="expJurBullets"></ul>
+              </article>
+
+              <article class="exp-era">
+                <h4>Cretácico</h4>
+                <p id="expCreWhy"></p>
+                <ul id="expCreBullets"></ul>
+              </article>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="container footer__inner">
+        <p>
+          Hecho con cariño por los dinosaurios: divulgación + diseño + JavaScript vanilla.
+          Cambia de época para ver cómo varía la narrativa… y recuerda: en el Mesozoico, el verdadero final boss es la biología.
+        </p>
+        <p class="muted small">
+          Publicado con GitHub Pages
+        </p>
+      </div>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
